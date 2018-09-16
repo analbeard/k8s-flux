@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: httpbin
-          image: registry.analbeard.com/website/simonweald:latest
+          image: kennethreitz/httpbin:latest
           ports:
             - containerPort: 80
           readinessProbe:
