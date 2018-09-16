@@ -6,6 +6,7 @@ metadata:
   annotations:
     kubernetes.io/tls-acme: "true"
     certmanager.k8s.io/cluster-issuer: "letsencrypt-prod"
+    monitor.stakater.com/enabled: "true"
 spec:
   tls:
   - secretName: httpbin-analbeard-com
