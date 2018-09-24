@@ -1,0 +1,32 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: startpage
+  namespace: shw
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: launch
+    spec:
+      containers:
+        - name: front-end
+          image: registry.analbeard.com/amd64/startpage:latest
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 3
+      imagePullSecrets:
+      - name: registry-secret
