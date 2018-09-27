@@ -29,4 +29,35 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 3
       imagePullSecrets:
-      - name: registry-secret
+        - name: registry-secret
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: startpage-cache
+  namespace: shw
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: startpage-cache
+    spec:
+      volumes:
+        - name: varnish-config
+          configMap:
+            name: startpage-vcl
+            items:
+              - key: default.vcl
+                path: default.vcl
+      containers:
+        - name: varnish
+          image: million12/varnish
+          env:
+            - name: VCL_CONFIG
+              value: /etc/varnish/default.vcl
+          volumeMounts:
+            - name: varnish-config
+              mountPath: /etc/varnish/
+          ports:
+            - containerPort: 80

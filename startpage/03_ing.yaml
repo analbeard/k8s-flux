@@ -10,12 +10,12 @@ metadata:
 spec:
   tls:
   - secretName: start.analbeard.com
-    hosts: 
+    hosts:
     - start.analbeard.com
   rules:
   - host: start.analbeard.com
     http:
       paths:
       - backend:
-          serviceName: startpage
+          serviceName: startpage-cache
           servicePort: 80

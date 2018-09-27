@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -5,8 +6,21 @@ metadata:
   namespace: shw
 spec:
   ports:
-  - port: 80 
-    targetPort: 80
-    protocol: TCP
+    - port: 80
+      targetPort: 80
+      protocol: TCP
   selector:
     app: launch
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: startpage-cache
+  namespace: shw
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: startpage-cache
