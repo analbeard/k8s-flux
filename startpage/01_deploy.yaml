@@ -4,6 +4,8 @@ kind: Deployment
 metadata:
   name: startpage
   namespace: shw
+  annotations:
+    flux.weave.works/automated: 'true'
 spec:
   replicas: 2
   template:
@@ -12,24 +14,24 @@ spec:
         app: launch
     spec:
       containers:
-        - name: front-end
-          image: registry.analbeard.com/amd64/startpage:latest
-          ports:
-            - containerPort: 80
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 5
-            periodSeconds: 3
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 5
-            periodSeconds: 3
+      - name: front-end
+        image: registry.analbeard.com/amd64/startpage:latest
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 3
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 3
       imagePullSecrets:
-        - name: registry-secret
+      - name: registry-secret
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -44,20 +46,20 @@ spec:
         app: startpage-cache
     spec:
       volumes:
-        - name: varnish-config
-          configMap:
-            name: startpage-vcl
-            items:
-              - key: default.vcl
-                path: default.vcl
+      - name: varnish-config
+        configMap:
+          name: startpage-vcl
+          items:
+          - key: default.vcl
+            path: default.vcl
       containers:
-        - name: varnish
-          image: million12/varnish
-          env:
-            - name: VCL_CONFIG
-              value: /etc/varnish/default.vcl
-          volumeMounts:
-            - name: varnish-config
-              mountPath: /etc/varnish/
-          ports:
-            - containerPort: 80
+      - name: varnish
+        image: million12/varnish
+        env:
+        - name: VCL_CONFIG
+          value: /etc/varnish/default.vcl
+        volumeMounts:
+        - name: varnish-config
+          mountPath: /etc/varnish/
+        ports:
+        - containerPort: 80
