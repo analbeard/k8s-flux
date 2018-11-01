@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: front-end
-        image: registry.analbeard.com/website/simonweald:latest
+        image: registry.analbeard.com/website/simonweald:5bd61c5
         ports:
         - containerPort: 80
         readinessProbe:
