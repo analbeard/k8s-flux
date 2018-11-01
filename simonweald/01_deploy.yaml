@@ -4,6 +4,8 @@ kind: Deployment
 metadata:
   name: simonweald-com
   namespace: shw
+  annotations:
+    flux.weave.works/automated: 'true'
 spec:
   replicas: 2
   template:
@@ -12,21 +14,21 @@ spec:
         app: web
     spec:
       containers:
-        - name: front-end
-          image: registry.analbeard.com/website/simonweald:latest
-          ports:
-            - containerPort: 80
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 5
-            periodSeconds: 3
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 5
-            periodSeconds: 3
+      - name: front-end
+        image: registry.analbeard.com/website/simonweald:latest
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 3
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 3
       imagePullSecrets:
       - name: registry-secret
