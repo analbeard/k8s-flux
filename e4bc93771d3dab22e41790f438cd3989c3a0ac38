@@ -1,0 +1,1 @@
+{"jobID":"1cb4fd59-1544-bb83-5af6-2838673c60a7","spec":{"type":"policy","cause":{"Message":"","User":"Simon Weald \u003csimon@simonweald.com\u003e"},"spec":{"shw:deployment/simonweald-com":{"add":{"automated":"true"},"remove":{}}}},"result":null}
