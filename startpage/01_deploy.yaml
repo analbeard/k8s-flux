@@ -17,17 +17,18 @@ spec:
       - name: front-end
         image: registry.analbeard.com/amd64/startpage:9331a62
         ports:
-        - containerPort: 80
+        - name: http-port
+          containerPort: 80
         readinessProbe:
           httpGet:
             path: /healthz
-            port: 80
+            port: http-port
           initialDelaySeconds: 5
           periodSeconds: 3
         livenessProbe:
           httpGet:
             path: /healthz
-            port: 80
+            port: http-port
           initialDelaySeconds: 5
           periodSeconds: 3
       imagePullSecrets:
@@ -62,4 +63,5 @@ spec:
         - name: varnish-config
           mountPath: /etc/varnish/
         ports:
-        - containerPort: 80
+        - name: varnish-port
+          containerPort: 80
