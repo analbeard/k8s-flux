@@ -55,7 +55,7 @@ spec:
             path: default.vcl
       containers:
       - name: varnish
-        image: million12/varnish
+        image: hermsi/alpine-varnish:6.1
         env:
         - name: VCL_CONFIG
           value: /etc/varnish/default.vcl
