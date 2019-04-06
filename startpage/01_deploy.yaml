@@ -64,4 +64,4 @@ spec:
           mountPath: /etc/varnish/
         ports:
         - name: varnish-port
-          containerPort: 80
+          containerPort: 8080
