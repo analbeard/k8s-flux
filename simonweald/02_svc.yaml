@@ -5,8 +5,21 @@ metadata:
   namespace: shw
 spec:
   ports:
-  - port: 80 
+  - port: 80
     targetPort: 80
     protocol: TCP
   selector:
-    app: web
+    app: simonweald-com
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simonweald-com-cache
+  namespace: shw
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: simonweald-com-cache

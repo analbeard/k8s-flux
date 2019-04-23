@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: www-simonweald-com
+  name: www.simonweald.com
   namespace: shw
   annotations:
     kubernetes.io/tls-acme: "true"
@@ -17,5 +17,5 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: simonweald-com
+          serviceName: simonweald-com-cache
           servicePort: 80
