@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: simonweald-com-vcl
+  namespace: shw
+data:
+  default.vcl: |
+    # See the VCL chapters in the Users Guide at https://www.varnish-cache.org/docs/
+    # and https://www.varnish-cache.org/trac/wiki/VCLExamples for more examples.
+
+    # Marker to tell the VCL compiler that this VCL has been adapted to the
+    # new 4.0 format.
+    vcl 4.0;
+
+    # import the std vmod
+    import std;
+
+    # Default backend definition. Set this to point to your content server.
+    backend default {
+      .host = "simonweald-com";
+      .port = "80";
+    }
+
+    sub vcl_recv {
+      # Happens before we check if we have this in cache already.
+      #
+      # Typically you clean up the request here, removing cookies you don't need,
+      # rewriting the request, etc.
+
+      if (req.method != "GET" && req.method != "HEAD") {
+        /* We only deal with GET and HEAD by default */
+        return (pass);
+      }
+
+    }
+
+    sub vcl_backend_response {
+      # Happens after we have read the response headers from the backend.
+      #
+      # Here you clean the response headers, removing silly Set-Cookie headers
+      # and other mistakes your backend does.
+
+      # enable gzip compression for text content
+      if (beresp.http.content-type ~ "(^text/|application/x-javascript|application/javascript)") {
+        set beresp.do_gzip = true;
+      }
+
+    }
+
+    sub vcl_deliver {
+      # Happens when we have all the pieces we need, and are about to send the
+      # response to the client.
+      #
+      # You can do accounting or modifying the final object here.
+    }
