@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: start.analbeard.com
+  name: start-analbeard-com
   namespace: shw
   annotations:
     kubernetes.io/tls-acme: "true"
@@ -9,7 +9,7 @@ metadata:
     ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   tls:
-  - secretName: start.analbeard.com
+  - secretName: start-analbeard-com
     hosts:
     - start.analbeard.com
   rules:
