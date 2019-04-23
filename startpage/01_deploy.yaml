@@ -32,7 +32,7 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 3
       imagePullSecrets:
-      - name: registry-secret
+      - name: private-registry-auth
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
