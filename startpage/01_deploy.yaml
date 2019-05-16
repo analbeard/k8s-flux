@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: front-end
-        image: registry.analbeard.com/amd64/startpage:9331a62
+        image: registry.analbeard.com/amd64/startpage:086e944
         ports:
         - name: http-port
           containerPort: 80
