@@ -12,15 +12,8 @@ spec:
   - secretName: www-simonweald-com
     hosts:
     - www.simonweald.com
-    - simonweald.com
   rules:
   - host: www.simonweald.com
-    http:
-      paths:
-      - backend:
-          serviceName: simonweald-com-cache
-          servicePort: 80
-  - host: simonweald.com
     http:
       paths:
       - backend:
