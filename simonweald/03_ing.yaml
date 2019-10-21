@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: www.simonweald.com
-  namespace: shw
+  namespace: web
   annotations:
     kubernetes.io/tls-acme: "true"
     certmanager.k8s.io/cluster-issuer: "letsencrypt-prod"

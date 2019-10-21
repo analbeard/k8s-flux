@@ -3,16 +3,26 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: simonweald-com
-  namespace: shw
+  namespace: web
   annotations:
     flux.weave.works/automated: 'true'
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
         app: simonweald-com
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - simonweald-com
+            topologyKey: "kubernetes.io/hostname"
       containers:
       - name: front-end
         image: registry.analbeard.com/website/simonweald:a288bbe
@@ -38,7 +48,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: simonweald-com-cache
-  namespace: shw
+  namespace: web
 spec:
   replicas: 2
   template:
@@ -46,6 +56,16 @@ spec:
       labels:
         app: simonweald-com-cache
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - simonweald-com-cache
+            topologyKey: "kubernetes.io/hostname"
       volumes:
       - name: varnish-config
         configMap:

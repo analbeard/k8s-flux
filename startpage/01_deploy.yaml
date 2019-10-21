@@ -3,16 +3,26 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: startpage
-  namespace: shw
+  namespace: web
   annotations:
     flux.weave.works/automated: 'true'
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
         app: startpage
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - startpage
+            topologyKey: "kubernetes.io/hostname"
       containers:
       - name: front-end
         image: registry.analbeard.com/amd64/startpage:2713911
@@ -38,7 +48,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: startpage-cache
-  namespace: shw
+  namespace: web
 spec:
   replicas: 2
   template:
@@ -46,6 +56,16 @@ spec:
       labels:
         app: startpage-cache
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - startpage-cache
+            topologyKey: "kubernetes.io/hostname"
       volumes:
       - name: varnish-config
         configMap:
