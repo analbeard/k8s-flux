@@ -8,6 +8,7 @@ metadata:
     certmanager.k8s.io/cluster-issuer: "letsencrypt-prod"
     ingress.kubernetes.io/force-ssl-redirect: "true"
     monitor.stakater.com/enabled: "true"
+    kubernetes.io/ingress.class: "contour"
 spec:
   tls:
   - secretName: www-simonweald-com
