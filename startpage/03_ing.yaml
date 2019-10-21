@@ -11,7 +11,7 @@ metadata:
     kubernetes.io/ingress.class: "contour"
 spec:
   tls:
-  - secretName: start-analbeard-com
+  - secretName: start-analbeard-com-tls
     hosts:
     - start.analbeard.com
   rules:

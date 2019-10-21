@@ -11,7 +11,7 @@ metadata:
     kubernetes.io/ingress.class: "contour"
 spec:
   tls:
-  - secretName: www-simonweald-com
+  - secretName: www-simonweald-com-tls
     hosts:
     - www.simonweald.com
   rules:
