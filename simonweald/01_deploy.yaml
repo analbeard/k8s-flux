@@ -3,7 +3,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: simonweald-com
-  namespace: shw
+  namespace: web
   annotations:
     flux.weave.works/automated: 'true'
 spec:
@@ -48,7 +48,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: simonweald-com-cache
-  namespace: shw
+  namespace: web
 spec:
   replicas: 2
   template:
