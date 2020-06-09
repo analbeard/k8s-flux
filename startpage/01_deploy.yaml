@@ -25,7 +25,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"
       containers:
       - name: front-end
-        image: registry.analbeard.com/amd64/startpage:b8f8eba
+        image: registry.analbeard.com/amd64/startpage:54dd359
         ports:
         - name: http-port
           containerPort: 80
