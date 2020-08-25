@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: simonweald-com-vcl
-  namespace: web
+  namespace: wealdy
 data:
   default.vcl: |
     # See the VCL chapters in the Users Guide at https://www.varnish-cache.org/docs/
