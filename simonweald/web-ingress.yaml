@@ -17,5 +17,5 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: simonweald-com-cache
+          serviceName: simonweald-cache
           servicePort: 80
