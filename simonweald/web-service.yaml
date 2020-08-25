@@ -3,6 +3,9 @@ kind: Service
 metadata:
   name: simonweald-web
   namespace: wealdy
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: simonweald-web
 spec:
   ports:
   - port: 80

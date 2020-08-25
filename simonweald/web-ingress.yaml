@@ -3,6 +3,9 @@ kind: Ingress
 metadata:
   name: www.simonweald.com
   namespace: wealdy
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: simonweald-web
   annotations:
     kubernetes.io/tls-acme: "true"
     cert-manager.io/issuer: "letsencrypt-wealdy"

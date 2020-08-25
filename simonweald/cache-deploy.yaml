@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: simonweald-cache
   namespace: wealdy
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: simonweald-cache
 spec:
   replicas: 2
   selector:

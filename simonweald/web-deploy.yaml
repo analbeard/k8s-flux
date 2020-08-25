@@ -4,6 +4,9 @@ kind: Deployment
 metadata:
   name: simonweald-web
   namespace: wealdy
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: simonweald-web
   annotations:
     flux.weave.works/automated: 'true'
 spec:
