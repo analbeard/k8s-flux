@@ -1,0 +1,26 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: simonweald-cache-psp
+rules:
+- apiGroups:
+  - extensions
+  resourceNames:
+  - simonweald-cache
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: simonweald-cache-psp
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: simonweald-cache-psp
+subjects:
+- kind: ServiceAccount
+  name: simonweald-cache
+  namespace: wealdy
