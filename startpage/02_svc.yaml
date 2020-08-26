@@ -11,16 +11,3 @@ spec:
       protocol: TCP
   selector:
     app: startpage
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: startpage-cache
-  namespace: web
-spec:
-  ports:
-    - port: 80
-      targetPort: 8080
-      protocol: TCP
-  selector:
-    app: startpage-cache
