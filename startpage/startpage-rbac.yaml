@@ -1,0 +1,34 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: startpage-web-psp
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: startpage
+    app.kubernetes.io/component: startpage-web
+rules:
+- apiGroups:
+  - extensions
+  resourceNames:
+  - startpage-web
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: startpage-web-psp
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: startpage
+    app.kubernetes.io/component: startpage-web
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: startpage-web-psp
+subjects:
+- kind: ServiceAccount
+  name: startpage-web
+  namespace: wealdy

@@ -1,8 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: simonweald-com-vcl
-  namespace: web
+  name: simonweald-cache-vcl
+  namespace: wealdy
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: simonweald
+    app.kubernetes.io/component: simonweald-cache
 data:
   default.vcl: |
     # See the VCL chapters in the Users Guide at https://www.varnish-cache.org/docs/
@@ -17,7 +21,7 @@ data:
 
     # Default backend definition. Set this to point to your content server.
     backend default {
-      .host = "simonweald-com";
+      .host = "simonweald-web";
       .port = "80";
     }
 

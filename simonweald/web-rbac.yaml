@@ -1,0 +1,34 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: simonweald-web-psp
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: simonweald
+    app.kubernetes.io/component: simonweald-web
+rules:
+- apiGroups:
+  - extensions
+  resourceNames:
+  - simonweald-web
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: simonweald-web-psp
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: simonweald
+    app.kubernetes.io/component: simonweald-web
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: simonweald-web-psp
+subjects:
+- kind: ServiceAccount
+  name: simonweald-web
+  namespace: wealdy

@@ -2,13 +2,15 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: www.simonweald.com
-  namespace: web
+  namespace: wealdy
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: simonweald
+    app.kubernetes.io/component: simonweald-web
   annotations:
     kubernetes.io/tls-acme: "true"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/issuer: "letsencrypt-wealdy"
     ingress.kubernetes.io/force-ssl-redirect: "true"
-    monitor.stakater.com/enabled: "true"
-    kubernetes.io/ingress.class: "contour"
 spec:
   tls:
   - secretName: www-simonweald-com-tls
@@ -19,5 +21,5 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: simonweald-com-cache
+          serviceName: simonweald-cache
           servicePort: 80

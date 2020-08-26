@@ -1,0 +1,28 @@
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: startpage-cache
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: startpage
+    app.kubernetes.io/component: startpage-cache
+spec:
+  allowedCapabilities: [] # drop default capabilities
+  allowPrivilegeEscalation: false
+  fsGroup:
+    rule: RunAsAny
+  hostIPC: false
+  hostNetwork: false
+  hostPID: false
+  privileged: false
+  runAsGroup:
+    rule: RunAsAny
+  runAsUser:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  volumes:
+  - configMap
+  - secret

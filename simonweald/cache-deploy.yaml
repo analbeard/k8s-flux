@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simonweald-cache
+  namespace: wealdy
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: simonweald
+    app.kubernetes.io/component: simonweald-cache
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: simonweald-cache
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: simonweald-cache
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - simonweald-cache
+            topologyKey: "kubernetes.io/hostname"
+      serviceAccount: simonweald-cache
+      serviceAccountName: simonweald-cache
+      containers:
+      - name: varnish
+        image: hermsi/alpine-varnish:6.1
+        env:
+        - name: VCL_CONFIG
+          value: /etc/varnish/default.vcl
+        volumeMounts:
+        - name: varnish-config
+          mountPath: /etc/varnish/
+        ports:
+        - name: varnish-port
+          containerPort: 8080
+      volumes:
+      - name: varnish-config
+        configMap:
+          name: simonweald-cache-vcl
+          items:
+          - key: default.vcl
+            path: default.vcl
