@@ -5,11 +5,12 @@ metadata:
   namespace: wealdy
   labels:
     owner: simonweald-at-giantswarm.io
-    app.kubernetes.io/name: simonweald-web
+    app.kubernetes.io/name: startpage
+    app.kubernetes.io/component: startpage-cache
 spec:
   ports:
     - port: 80
       targetPort: 8080
       protocol: TCP
   selector:
-    app: startpage-cache
+    app.kubernetes.io/component: startpage-cache

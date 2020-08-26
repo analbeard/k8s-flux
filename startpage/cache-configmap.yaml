@@ -3,6 +3,10 @@ kind: ConfigMap
 metadata:
   name: startpage-cache-vcl
   namespace: wealdy
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: startpage
+    app.kubernetes.io/component: startpage-cache
 data:
   default.vcl: |
     # See the VCL chapters in the Users Guide at https://www.varnish-cache.org/docs/

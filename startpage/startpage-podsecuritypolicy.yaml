@@ -4,7 +4,8 @@ metadata:
   name: startpage-web
   labels:
     owner: simonweald-at-giantswarm.io
-    app.kubernetes.io/name: startpage-web
+    app.kubernetes.io/name: startpage
+    app.kubernetes.io/component: startpage-web
 spec:
   allowedCapabilities: [] # drop default capabilities
   allowPrivilegeEscalation: false

@@ -1,13 +1,16 @@
----
 apiVersion: v1
 kind: Service
 metadata:
   name: startpage
-  namespace: web
+  namespace: wealdy
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: startpage
+    app.kubernetes.io/component: startpage-web
 spec:
   ports:
     - port: 80
       targetPort: 80
       protocol: TCP
   selector:
-    app: startpage
+    app.kubernetes.io/component: startpage-web

@@ -5,7 +5,8 @@ metadata:
   namespace: wealdy
   labels:
     owner: simonweald-at-giantswarm.io
-    app.kubernetes.io/name: startpage-web
+    app.kubernetes.io/name: startpage
+    app.kubernetes.io/component: startpage-web
   annotations:
     kubernetes.io/tls-acme: "true"
     cert-manager.io/issuer: "letsencrypt-wealdy"

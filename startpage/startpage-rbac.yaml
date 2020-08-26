@@ -4,7 +4,8 @@ metadata:
   name: startpage-web-psp
   labels:
     owner: simonweald-at-giantswarm.io
-    app.kubernetes.io/name: startpage-web
+    app.kubernetes.io/name: startpage
+    app.kubernetes.io/component: startpage-web
 rules:
 - apiGroups:
   - extensions
@@ -21,7 +22,8 @@ metadata:
   name: startpage-web-psp
   labels:
     owner: simonweald-at-giantswarm.io
-    app.kubernetes.io/name: startpage-web
+    app.kubernetes.io/name: startpage
+    app.kubernetes.io/component: startpage-web
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
