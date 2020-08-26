@@ -6,18 +6,19 @@ metadata:
   namespace: wealdy
   labels:
     owner: simonweald-at-giantswarm.io
-    app.kubernetes.io/name: simonweald-web
+    app.kubernetes.io/name: simonweald
+    app.kubernetes.io/component: simonweald-web
   annotations:
     flux.weave.works/automated: 'true'
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: simonweald-web
+      app.kubernetes.io/component: simonweald-web
   template:
     metadata:
       labels:
-        app: simonweald-web
+        app.kubernetes.io/component: simonweald-web
     spec:
       affinity:
         podAntiAffinity:

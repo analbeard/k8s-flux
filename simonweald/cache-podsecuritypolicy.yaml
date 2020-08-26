@@ -4,7 +4,8 @@ metadata:
   name: simonweald-cache
   labels:
     owner: simonweald-at-giantswarm.io
-    app.kubernetes.io/name: simonweald-cache
+    app.kubernetes.io/name: simonweald
+    app.kubernetes.io/component: simonweald-cache
 spec:
   allowedCapabilities: [] # drop default capabilities
   allowPrivilegeEscalation: false
