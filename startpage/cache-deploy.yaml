@@ -3,6 +3,11 @@ kind: Deployment
 metadata:
   name: startpage-cache
   namespace: wealdy
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: startpage-cache
+  annotations:
+    flux.weave.works/automated: 'true'
 spec:
   replicas: 2
   selector:
