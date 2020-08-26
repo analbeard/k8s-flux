@@ -1,17 +1,23 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: startpage
-  namespace: web
+  name: startpage-web
+  namespace: wealdy
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: startpage-web
   annotations:
     flux.weave.works/automated: 'true'
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      app: startpage-web
   template:
     metadata:
       labels:
-        app: startpage
+        app: startpage-web
     spec:
       affinity:
         podAntiAffinity:
@@ -23,6 +29,8 @@ spec:
                 values:
                 - startpage
             topologyKey: "kubernetes.io/hostname"
+      serviceAccount: startpage-web
+      serviceAccountName: startpage-web
       containers:
       - name: front-end
         image: registry.analbeard.com/amd64/startpage:54dd359
