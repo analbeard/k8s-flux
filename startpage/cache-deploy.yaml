@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: startpage-cache
+  namespace: wealdy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: startpage-cache
+  template:
+    metadata:
+      labels:
+        app: startpage-cache
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - startpage-cache
+            topologyKey: "kubernetes.io/hostname"
+      serviceAccount: startpage-cache
+      serviceAccountName: startpage-cache
+      containers:
+      - name: varnish
+        image: hermsi/alpine-varnish:6.1
+        env:
+        - name: VCL_CONFIG
+          value: /etc/varnish/default.vcl
+        volumeMounts:
+        - name: varnish-config
+          mountPath: /etc/varnish/
+        ports:
+        - name: varnish-port
+          containerPort: 8080
+      volumes:
+      - name: varnish-config
+        configMap:
+          name: startpage-cache-vcl
+          items:
+          - key: default.vcl
+            path: default.vcl
