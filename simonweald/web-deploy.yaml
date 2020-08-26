@@ -29,9 +29,9 @@ spec:
                 values:
                 - simonweald-web
             topologyKey: "kubernetes.io/hostname"
-      containers:
       serviceAccount: simonweald-web
       serviceAccountName: simonweald-web
+      containers:
       - name: front-end
         image: registry.analbeard.com/website/simonweald:a288bbe
         ports:
