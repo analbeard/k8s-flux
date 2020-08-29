@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -33,7 +34,7 @@ spec:
       serviceAccountName: startpage-cache
       containers:
       - name: varnish
-        image: hermsi/alpine-varnish:6.1
+        image: hermsi/alpine-varnish:6.4
         env:
         - name: VCL_CONFIG
           value: /etc/varnish/default.vcl
