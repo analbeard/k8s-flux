@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/component: startpage-cache
 rules:
 - apiGroups:
-  - extensions
+  - policy
   resourceNames:
   - startpage-cache
   resources:

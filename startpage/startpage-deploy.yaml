@@ -32,6 +32,9 @@ spec:
             topologyKey: "kubernetes.io/hostname"
       serviceAccount: startpage-web
       serviceAccountName: startpage-web
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
       containers:
       - name: front-end
         image: registry.analbeard.com/amd64/startpage:54dd359

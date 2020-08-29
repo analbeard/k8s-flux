@@ -29,6 +29,9 @@ spec:
             topologyKey: "kubernetes.io/hostname"
       serviceAccount: simonweald-cache
       serviceAccountName: simonweald-cache
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
       containers:
       - name: varnish
         image: hermsi/alpine-varnish:6.1
