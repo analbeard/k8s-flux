@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/component: simonweald-web
 rules:
 - apiGroups:
-  - extensions
+  - policy
   resourceNames:
   - simonweald-web
   resources:

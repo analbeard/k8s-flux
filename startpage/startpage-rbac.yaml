@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/component: startpage-web
 rules:
 - apiGroups:
-  - extensions
+  - policy
   resourceNames:
   - startpage-web
   resources:
