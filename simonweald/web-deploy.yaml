@@ -32,6 +32,9 @@ spec:
             topologyKey: "kubernetes.io/hostname"
       serviceAccount: simonweald-web
       serviceAccountName: simonweald-web
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
       containers:
       - name: front-end
         image: registry.analbeard.com/website/simonweald:a288bbe
