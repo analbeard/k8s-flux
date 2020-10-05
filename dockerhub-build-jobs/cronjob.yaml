@@ -1,0 +1,164 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dockerhub-build-arch
+  namespace: wealdy
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: dockerhub-build
+    app.kubernetes.io/component: arch-build-container
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          serviceAccountName: dockerhub-build
+          containers:
+          - name: curl
+            image: curlimages/curl:latest
+            imagePullPolicy: Always
+            command:
+            - sh
+            - -c
+            - |
+              set -o errexit ; set -o xtrace ; set -o nounset
+
+              curl -X POST \
+                  -v \
+                  -d '{"docker_tag": "latest"}' \
+                  -H "Content-Type: application/json" \
+                  -v https://hub.docker.com/api/build/v1/source/${SOURCE}/trigger/${TRIGGER}/call/
+            env:
+              - name: SOURCE
+                valueFrom:
+                  secretKeyRef:
+                    name: arch-build-container-credentials
+                    key: SOURCE
+              - name: TRIGGER
+                valueFrom:
+                  secretKeyRef:
+                    name: arch-build-container-credentials
+                    key: TRIGGER
+          restartPolicy: Never
+  schedule: '20 3 * * *'
+  successfulJobsHistoryLimit: 3
+  suspend: false
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dockerhub-build-alpine
+  namespace: wealdy
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: dockerhub-build
+    app.kubernetes.io/component: alpine-debug-container
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          serviceAccountName: dockerhub-build
+          containers:
+          - name: curl
+            image: curlimages/curl:latest
+            imagePullPolicy: Always
+            command:
+            - sh
+            - -c
+            - |
+              set -o errexit ; set -o xtrace ; set -o nounset
+
+              curl -X POST \
+                  -v \
+                  -d '{"docker_tag": "latest"}' \
+                  -H "Content-Type: application/json" \
+                  https://hub.docker.com/api/build/v1/source/${SOURCE}/trigger/${TRIGGER}/call/
+            env:
+              - name: SOURCE
+                valueFrom:
+                  secretKeyRef:
+                    name: alpine-debug-container-credentials
+                    key: SOURCE
+              - name: TRIGGER
+                valueFrom:
+                  secretKeyRef:
+                    name: alpine-debug-container-credentials
+                    key: TRIGGER
+          restartPolicy: Never
+  schedule: '10 3 * * *'
+  successfulJobsHistoryLimit: 3
+  suspend: false
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dockerhub-build-ubuntu
+  namespace: wealdy
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: dockerhub-build
+    app.kubernetes.io/component: ubuntu-debug-container
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          serviceAccountName: dockerhub-build
+          containers:
+          - name: curl
+            image: curlimages/curl:latest
+            imagePullPolicy: Always
+            command:
+            - sh
+            - -c
+            - |
+              set -o errexit ; set -o xtrace ; set -o nounset
+
+              curl -X POST \
+                  -v \
+                  -d '{"docker_tag": "latest"}' \
+                  -H "Content-Type: application/json" \
+                  -v https://hub.docker.com/api/build/v1/source/${SOURCE}/trigger/${TRIGGER}/call/
+            env:
+              - name: SOURCE
+                valueFrom:
+                  secretKeyRef:
+                    name: ubuntu-debug-container-credentials
+                    key: SOURCE
+              - name: TRIGGER
+                valueFrom:
+                  secretKeyRef:
+                    name: ubuntu-debug-container-credentials
+                    key: TRIGGER
+          restartPolicy: Never
+  schedule: '0 3 * * *'
+  successfulJobsHistoryLimit: 3
+  suspend: false

@@ -1,0 +1,32 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: dockerhub-build-psp
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: dockerhub-build
+rules:
+- apiGroups:
+  - policy
+  resourceNames:
+  - dockerhub-build
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: dockerhub-build-psp
+  labels:
+    owner: simonweald-at-giantswarm.io
+    app.kubernetes.io/name: dockerhub-build
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: dockerhub-build-psp
+subjects:
+- kind: ServiceAccount
+  name: dockerhub-build
+  namespace: wealdy
