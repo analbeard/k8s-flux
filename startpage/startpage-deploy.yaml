@@ -33,14 +33,14 @@ spec:
       serviceAccount: startpage-web
       serviceAccountName: startpage-web
       securityContext:
-        runAsUser: 0
-        runAsGroup: 0
+        runAsUser: 101
+        runAsGroup: 101
       containers:
       - name: front-end
         image: registry.analbeard.com/amd64/startpage:936dcdc
         ports:
         - name: http-port
-          containerPort: 80
+          containerPort: 8080
         readinessProbe:
           httpGet:
             path: /healthz

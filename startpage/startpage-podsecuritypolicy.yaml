@@ -16,9 +16,15 @@ spec:
   hostPID: false
   privileged: false
   runAsGroup:
-    rule: RunAsAny
+    rule: MustRunAs
+    ranges:
+      - min: 101
+        max: 101
   runAsUser:
-    rule: RunAsAny
+    rule: MustRunAs
+    ranges:
+      - min: 101
+        max: 101
   seLinux:
     rule: RunAsAny
   supplementalGroups:
