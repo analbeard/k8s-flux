@@ -37,7 +37,7 @@ spec:
         runAsGroup: 101
       containers:
       - name: front-end
-        image: registry.analbeard.com/amd64/startpage:936dcdc
+        image: registry.analbeard.com/amd64/startpage:e855d87
         ports:
         - name: http-port
           containerPort: 8080
