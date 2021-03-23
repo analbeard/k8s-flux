@@ -1,5 +1,5 @@
 apiVersion: networking.k8s.io/v1
-ikind: Ingress
+kind: Ingress
 metadata:
   name: www.simonweald.com
   namespace: wealdy
