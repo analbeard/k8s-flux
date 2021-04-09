@@ -20,6 +20,10 @@ spec:
   - host: www.simonweald.com
     http:
       paths:
-      - backend:
-          serviceName: simonweald-cache
-          servicePort: 80
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: simonweald-cache
+            port:
+              number: 80
