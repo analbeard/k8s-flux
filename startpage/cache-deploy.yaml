@@ -37,7 +37,7 @@ spec:
         runAsGroup: 0
       containers:
       - name: varnish
-        image: hermsi/alpine-varnish:6.5
+        image: hermsi/alpine-varnish:6
         env:
         - name: VCL_CONFIG
           value: /etc/varnish/default.vcl
