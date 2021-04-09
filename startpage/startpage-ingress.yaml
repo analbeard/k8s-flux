@@ -20,6 +20,10 @@ spec:
   - host: start.analbeard.com
     http:
       paths:
-      - backend:
-          serviceName: startpage-cache
-          servicePort: 80
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: startpage-cache
+            port:
+              number: 80
